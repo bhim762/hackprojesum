@@ -1,0 +1,7 @@
+{
+  "name": "Student Wand",
+  "description": "Student Login and Dashboard application with mobile authentication, academic schedules, attendance, and campus companion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

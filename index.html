@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Wand</title>
+    <meta name="description" content="Student Wand - Student Login, Academic Dashboard, Attendance, and Campus Companion." />
+    <meta property="og:title" content="Student Wand" />
+    <meta property="og:description" content="Student Wand - Student Login, Academic Dashboard, Attendance, and Campus Companion." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1E3A8A" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Student Wand" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      (function () {
+        // 1. Silent dummy WebSocket for Vite HMR to prevent "WebSocket closed without opened"
+        if (typeof window !== 'undefined') {
+          var NativeWS = window.WebSocket;
+          if (NativeWS) {
+            window.WebSocket = function (url, protocols) {
+              var urlStr = typeof url === 'string' ? url : (url && url.toString ? url.toString() : '');
+              if (
+                urlStr.indexOf('vite') !== -1 ||
+                urlStr.indexOf('3000') !== -1 ||
+                urlStr.indexOf('run.app') !== -1 ||
+                urlStr.indexOf('ws:') !== -1 ||
+                urlStr.indexOf('wss:') !== -1
+              ) {
+                // Return silent mock WebSocket
+                return {
+                  binaryType: 'blob',
+                  bufferedAmount: 0,
+                  extensions: '',
+                  protocol: '',
+                  readyState: 3, // CLOSED
+                  url: urlStr,
+                  onopen: null,
+                  onclose: null,
+                  onerror: null,
+                  onmessage: null,
+                  close: function () {},
+                  send: function () {},
+                  addEventListener: function () {},
+                  removeEventListener: function () {},
+                  dispatchEvent: function () { return true; },
+                };
+              }
+              return new NativeWS(url, protocols);
+            };
+            window.WebSocket.prototype = NativeWS.prototype;
+            window.WebSocket.CONNECTING = 0;
+            window.WebSocket.OPEN = 1;
+            window.WebSocket.CLOSING = 2;
+            window.WebSocket.CLOSED = 3;
+          }
+        }
+
+        // 2. Comprehensive console.error & console.warn filter
+        var origError = console.error;
+        var origWarn = console.warn;
+        function isViteHmrError(item) {
+          if (!item) return false;
+          var str = '';
+          try {
+            if (typeof item === 'string') {
+              str = item;
+            } else if (item instanceof Error) {
+              str = (item.message || '') + ' ' + (item.stack || '') + ' ' + String(item);
+            } else if (typeof item === 'object') {
+              str = (item.message || '') + ' ' + (item.reason || '') + ' ' + (item.error ? item.error.message : '') + ' ' + String(item);
+            } else {
+              str = String(item);
+            }
+          } catch (e) {
+            str = String(item);
+          }
+          str = str.toLowerCase();
+          return (
+            str.indexOf('websocket') !== -1 ||
+            str.indexOf('closed without opened') !== -1 ||
+            str.indexOf('failed to connect to websocket') !== -1 ||
+            str.indexOf('[vite]') !== -1 ||
+            str.indexOf('ws://') !== -1 ||
+            str.indexOf('wss://') !== -1
+          );
+        }
+
+        console.error = function () {
+          for (var i = 0; i < arguments.length; i++) {
+            if (isViteHmrError(arguments[i])) return;
+          }
+          origError.apply(console, arguments);
+        };
+
+        console.warn = function () {
+          for (var i = 0; i < arguments.length; i++) {
+            if (isViteHmrError(arguments[i])) return;
+          }
+          origWarn.apply(console, arguments);
+        };
+
+        window.addEventListener('unhandledrejection', function (event) {
+          var reason = event && event.reason;
+          if (isViteHmrError(reason)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener('error', function (event) {
+          var msg = event && (event.message || event.error);
+          if (isViteHmrError(msg)) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

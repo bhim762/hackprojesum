@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="wandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="50%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)"/>
+  <circle cx="256" cy="256" r="180" fill="url(#wandGrad)" opacity="0.15"/>
+  <!-- Graduation Cap & Wand -->
+  <path d="M256 140 L380 200 L256 260 L132 200 Z" fill="url(#wandGrad)"/>
+  <path d="M180 225 L180 290 Q256 340 332 290 L332 225 Q256 270 180 225 Z" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M380 200 L380 280 L370 290" stroke="#FBBF24" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- Sparkles / Wand Star -->
+  <polygon points="256,330 266,355 292,360 270,375 278,400 256,385 234,400 242,375 220,360 246,355" fill="#FBBF24"/>
+</svg>
